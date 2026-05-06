@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sparkles } from "lucide-react";
 import AspirasiModal from "@/components/AspirasiModal";
 
@@ -20,7 +21,7 @@ export default function Header() {
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 60);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -38,34 +39,53 @@ export default function Header() {
         }`}
         data-testid="site-header"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-          {/* Logo / brand */}
-          <Link
-            to="/"
-            className="group flex items-center gap-3"
-            data-testid="brand-link"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-amber-500/30 blur-xl transition-opacity group-hover:opacity-100 opacity-50" />
-              <img
-                src={LOGO_URL}
-                alt="DPM UB"
-                className="relative h-11 w-11 object-contain"
-              />
-            </div>
-            <div className="leading-tight">
-              <div className="font-display text-xl tracking-tight text-white">
-                DPM UB
-              </div>
-              <div className="font-body text-[10px] uppercase tracking-[0.25em] text-amber-400/80">
-                Parlemen Pilar Karsa
-              </div>
-            </div>
-          </Link>
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
+          {/* Logo / brand — fades on scroll */}
+          <AnimatePresence initial={false}>
+            {!scrolled && (
+              <motion.div
+                key="brand"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="flex shrink-0"
+              >
+                <Link
+                  to="/"
+                  className="group flex items-center gap-3.5"
+                  data-testid="brand-link"
+                >
+                  <div className="relative">
+                    <div className="absolute inset-0 rounded-full bg-amber-500/30 blur-2xl opacity-60 transition-opacity group-hover:opacity-100" />
+                    <img
+                      src={LOGO_URL}
+                      alt="DPM UB"
+                      className="relative h-16 w-16 object-contain"
+                    />
+                  </div>
+                  <div className="leading-tight">
+                    <div className="font-display text-2xl font-bold tracking-tight text-white">
+                      DPM UB
+                    </div>
+                    <div className="font-body text-[11px] uppercase tracking-[0.25em] text-amber-400/90">
+                      Parlemen Pilar Karsa
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-          {/* Pill nav (desktop) */}
-          <nav
-            className="hidden lg:flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] px-2 py-1.5 backdrop-blur-md"
+          {/* Pill nav (desktop) — grows on scroll */}
+          <motion.nav
+            layout
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className={`hidden lg:flex items-center gap-1 rounded-full border backdrop-blur-md transition-all duration-500 ${
+              scrolled
+                ? "mx-auto border-amber-400/25 bg-[#070C16]/80 px-3 py-2 shadow-[0_10px_40px_-10px_rgba(229,184,105,0.35)]"
+                : "border-white/10 bg-white/[0.03] px-2 py-1.5"
+            }`}
             aria-label="Primary"
           >
             {navItems.map((item) => (
@@ -75,29 +95,40 @@ export default function Header() {
                 end={item.to === "/"}
                 data-testid={item.testid}
                 className={({ isActive }) =>
-                  `relative rounded-full px-5 py-2 text-sm font-medium transition-all ${
+                  `relative rounded-full font-medium transition-all ${
+                    scrolled ? "px-6 py-2.5 text-[15px]" : "px-5 py-2 text-sm"
+                  } ${
                     isActive
-                      ? "bg-gradient-to-b from-amber-500/25 to-amber-700/10 text-white shadow-[inset_0_0_0_1px_rgba(229,184,105,0.35)]"
-                      : "text-slate-300 hover:text-white hover:bg-white/[0.04]"
+                      ? "bg-gradient-to-b from-amber-500/25 to-amber-700/10 text-white shadow-[inset_0_0_0_1px_rgba(229,184,105,0.4)]"
+                      : "text-slate-300 hover:text-white hover:bg-white/[0.05]"
                   }`
                 }
               >
                 {item.label}
               </NavLink>
             ))}
-          </nav>
+          </motion.nav>
 
-          {/* CTA */}
+          {/* CTA — fades on scroll */}
           <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setAspirasiOpen(true)}
-              data-testid="header-cta-aspirasi"
-              className="group relative hidden md:inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-amber-400 to-amber-700 px-5 py-2.5 text-sm font-semibold text-black shadow-[0_8px_30px_-10px_rgba(229,184,105,0.6)] transition-all hover:shadow-[0_8px_40px_-5px_rgba(229,184,105,0.8)] hover:scale-[1.03]"
-            >
-              <Sparkles className="h-4 w-4" />
-              Suarakan Aspirasimu
-            </button>
+            <AnimatePresence initial={false}>
+              {!scrolled && (
+                <motion.button
+                  key="cta"
+                  type="button"
+                  onClick={() => setAspirasiOpen(true)}
+                  data-testid="header-cta-aspirasi"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="group relative hidden md:inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-amber-400 to-amber-700 px-5 py-2.5 text-sm font-semibold text-black shadow-[0_8px_30px_-10px_rgba(229,184,105,0.6)] transition-shadow hover:shadow-[0_8px_40px_-5px_rgba(229,184,105,0.8)]"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  Suarakan Aspirasimu
+                </motion.button>
+              )}
+            </AnimatePresence>
 
             {/* mobile toggle */}
             <button

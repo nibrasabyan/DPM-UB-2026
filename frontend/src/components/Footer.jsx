@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { MapPin, Mail, Instagram, Linkedin } from "lucide-react";
 
 const LOGO_URL =
   "https://customer-assets.emergentagent.com/job_b2fc0a22-8731-4a19-80e8-90b4a3abe1f1/artifacts/o9onvhnk___FILOSOFI_LOGO_PARLEMEN_PILAR_KARSA__Halo__Brawijayans____Parlemen_Pilar_Karsa_merupakan_sim-removebg-preview.png";
@@ -10,12 +11,32 @@ const TAUTAN = [
   ["Aspirasi", "/aspirasi"],
 ];
 
-const SOSMED = [
-  ["Instagram", "https://instagram.com"],
-  ["LinkedIn", "https://linkedin.com"],
-  ["Youtube", "https://youtube.com"],
-  ["Twitter", "https://twitter.com"],
-  ["Tiktok", "https://tiktok.com"],
+const KONTAK = [
+  {
+    Icon: MapPin,
+    primary:
+      "Gedung EM-DPM UB Lantai 2, Universitas Brawijaya, Jl. Veteran No. 06C, Malang 65145",
+    href: "https://maps.google.com/?q=Universitas+Brawijaya+Malang",
+    testid: "footer-address",
+  },
+  {
+    Icon: Mail,
+    primary: "dpm@ub.ac.id",
+    href: "mailto:dpm@ub.ac.id",
+    testid: "footer-email",
+  },
+  {
+    Icon: Instagram,
+    primary: "@dpmub6",
+    href: "https://instagram.com/dpmub6",
+    testid: "footer-instagram",
+  },
+  {
+    Icon: Linkedin,
+    primary: "DPM UB",
+    href: "https://linkedin.com",
+    testid: "footer-linkedin",
+  },
 ];
 
 export default function Footer() {
@@ -31,7 +52,7 @@ export default function Footer() {
       <div className="pointer-events-none absolute -top-32 left-1/4 h-72 w-[500px] rounded-full bg-amber-500/15 blur-[140px]" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 rounded-full bg-amber-700/10 blur-[120px]" />
 
-      {/* Faint pillar curves */}
+      {/* faint pillar curves */}
       <svg
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-20 right-10 h-72 w-72 opacity-[0.06]"
@@ -46,63 +67,55 @@ export default function Footer() {
         />
       </svg>
 
-      <div className="relative mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:py-24">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-          {/* Brand column (col-span-4) */}
-          <div className="md:col-span-4 flex flex-col">
-            <div>
-              <p className="font-display text-[15px] leading-snug text-slate-200 sm:text-base">
-                Dewan Perwakilan Mahasiswa
-                <br />
-                Universitas Brawijaya 2026
-              </p>
+      <div className="relative mx-auto max-w-[1400px] px-4 py-20 sm:px-6 lg:px-10 lg:py-24">
+        <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:gap-10">
+          {/* Brand column (col-span-5) */}
+          <div className="md:col-span-5 flex flex-col items-start">
+            <p className="max-w-sm text-sm leading-relaxed text-slate-200 sm:text-base">
+              Dewan Perwakilan Mahasiswa
+              <br />
+              Universitas Brawijaya
+            </p>
+
+            {/* Big logo */}
+            <div className="my-8 relative">
+              <div className="absolute inset-0 rounded-full bg-amber-500/25 blur-[80px]" />
+              <img
+                src={LOGO_URL}
+                alt="DPM UB"
+                className="relative h-56 w-56 object-contain sm:h-64 sm:w-64 lg:h-72 lg:w-72"
+              />
             </div>
 
-            {/* Logo center */}
-            <div className="my-10 flex items-center">
-              <div className="relative">
-                <div className="absolute inset-0 rounded-full bg-amber-500/25 blur-3xl" />
-                <img
-                  src={LOGO_URL}
-                  alt="DPM UB"
-                  className="relative h-32 w-32 sm:h-40 sm:w-40 object-contain"
-                />
-              </div>
-            </div>
-
-            {/* Big tagline at bottom */}
-            <div className="mt-auto">
-              <div className="text-[11px] uppercase tracking-[0.3em] text-amber-400/80">
-                Parlemen
-              </div>
-              <h3
-                className="font-display text-5xl font-bold leading-[0.95] tracking-tight sm:text-6xl"
-                style={{
-                  background:
-                    "linear-gradient(120deg, #FBE2A0 0%, #E5B869 50%, #C68C48 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                }}
-              >
-                Pilar Karsa
-              </h3>
-            </div>
+            <h3
+              className="font-display text-4xl font-bold leading-[1] tracking-tight sm:text-5xl"
+              style={{
+                background:
+                  "linear-gradient(120deg, #FBE2A0 0%, #E5B869 50%, #C68C48 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              Parlemen Pilar Karsa
+            </h3>
           </div>
 
-          {/* Tautan (col-span-2) */}
-          <div className="md:col-span-2">
+          {/* Tautan (col-span-3) */}
+          <div className="md:col-span-3">
             <h4 className="font-display text-2xl font-bold text-white">
               Tautan
             </h4>
-            <ul className="mt-6 space-y-4">
+            <div className="mt-5 mb-7 h-px w-12 bg-gradient-to-r from-amber-500 to-transparent" />
+            <ul className="space-y-4">
               {TAUTAN.map(([label, to]) => (
                 <li key={to}>
                   <Link
                     to={to}
-                    className="text-sm text-slate-300 transition-colors hover:text-amber-300"
+                    className="group inline-flex items-center gap-2 text-sm text-slate-300 transition-colors hover:text-amber-300"
                     data-testid={`footer-link-${label.toLowerCase()}`}
                   >
+                    <span className="h-px w-3 bg-amber-400/60 transition-all group-hover:w-5 group-hover:bg-amber-300" />
                     {label}
                   </Link>
                 </li>
@@ -110,52 +123,32 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Sosial Media (col-span-2) */}
-          <div className="md:col-span-2">
+          {/* Hubungi Kami (col-span-4) */}
+          <div className="md:col-span-4">
             <h4 className="font-display text-2xl font-bold text-white">
-              Sosial Media
+              Hubungi Kami
             </h4>
-            <ul className="mt-6 space-y-4">
-              {SOSMED.map(([label, href]) => (
-                <li key={label}>
+            <div className="mt-5 mb-7 h-px w-12 bg-gradient-to-r from-amber-500 to-transparent" />
+            <ul className="space-y-5">
+              {KONTAK.map(({ Icon, primary, href, testid }, i) => (
+                <li key={i}>
                   <a
                     href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-slate-300 transition-colors hover:text-amber-300"
-                    data-testid={`footer-social-${label.toLowerCase()}`}
+                    target={href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      href.startsWith("http") ? "noopener noreferrer" : undefined
+                    }
+                    data-testid={testid}
+                    className="group flex items-start gap-3 text-sm text-slate-300 transition-colors hover:text-amber-300"
                   >
-                    {label}
+                    <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-amber-400/30 bg-amber-500/10 text-amber-300 transition-all group-hover:border-amber-400/60 group-hover:bg-amber-500/15">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <span className="leading-relaxed">{primary}</span>
                   </a>
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Alamat + Kontak (col-span-4) */}
-          <div className="md:col-span-4">
-            <h4 className="font-display text-2xl font-bold text-white">
-              Alamat
-            </h4>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-slate-300">
-              Gedung EM-DPM UB Lantai 2, Universitas Brawijaya
-              <br />
-              Jl. Veteran No. 06C, Malang 65145
-            </p>
-
-            <h4 className="mt-10 font-display text-2xl font-bold text-white">
-              Kontak Kami
-            </h4>
-            <p className="mt-5 text-sm text-slate-300">
-              E-mail :{" "}
-              <a
-                href="mailto:dpm@ub.ac.id"
-                className="text-amber-300 transition-colors hover:text-amber-200"
-                data-testid="footer-email"
-              >
-                dpm@ub.ac.id
-              </a>
-            </p>
           </div>
         </div>
 

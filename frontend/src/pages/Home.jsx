@@ -21,9 +21,6 @@ import AspirasiModal from "@/components/AspirasiModal";
 const REKTORAT_URL =
   "https://customer-assets.emergentagent.com/job_b2fc0a22-8731-4a19-80e8-90b4a3abe1f1/artifacts/q7n3rxgd_4595177066_9b844906f4_b-removebg-preview.png";
 
-const LOGO_URL =
-  "https://customer-assets.emergentagent.com/job_b2fc0a22-8731-4a19-80e8-90b4a3abe1f1/artifacts/o9onvhnk___FILOSOFI_LOGO_PARLEMEN_PILAR_KARSA__Halo__Brawijayans____Parlemen_Pilar_Karsa_merupakan_sim-removebg-preview.png";
-
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
@@ -245,35 +242,6 @@ function Hero({ onAspirasi }) {
                 filter: "blur(1.5px)",
               }}
             />
-
-            {/* Floating "Aktif Bertugas" badge */}
-            <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-2 -right-2 hidden md:flex items-center gap-2 rounded-full border border-amber-400/40 bg-[#070C16]/85 px-4 py-2 backdrop-blur-xl shadow-2xl"
-            >
-              <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_10px_2px_rgba(229,184,105,0.8)]" />
-              <span className="text-[11px] uppercase tracking-[0.2em] text-slate-100">
-                Aktif Bertugas
-              </span>
-            </motion.div>
-
-            {/* Floating logo badge */}
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-3 -left-2 hidden md:flex items-center gap-3 rounded-2xl border border-white/10 bg-[#070C16]/85 p-3 pr-5 backdrop-blur-xl shadow-2xl"
-            >
-              <img src={LOGO_URL} alt="" className="h-10 w-10" />
-              <div>
-                <div className="text-[9px] uppercase tracking-[0.25em] text-amber-400/80">
-                  Established
-                </div>
-                <div className="font-display text-base text-white">
-                  DPM UB · 2026
-                </div>
-              </div>
-            </motion.div>
           </div>
         </motion.div>
       </div>
