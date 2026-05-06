@@ -27,8 +27,8 @@ const KONTAK = [
   },
   {
     Icon: Instagram,
-    primary: "@dpmub6",
-    href: "https://instagram.com/dpmub6",
+    primary: "@dpmub",
+    href: "https://instagram.com/dpmub",
     testid: "footer-instagram",
   },
   {
