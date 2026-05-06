@@ -154,41 +154,35 @@ function Hero({ onAspirasi }) {
           </motion.div>
         </motion.div>
 
-        {/* Right - dominant Rektorat with elliptical halo */}
+        {/* Right - Rektorat blended seamlessly into the dark canvas */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           className="relative lg:col-span-6"
           data-testid="hero-rektorat"
         >
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-[600px]">
-            {/* Elliptical gold halo behind building (BEM FEB UI inspired) */}
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[620px]">
+            {/* Deep ambient gold radial glow — pure depth, no edge */}
+            <div className="pointer-events-none absolute left-1/2 top-[52%] -z-20 h-[110%] w-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/20 blur-[120px]" />
+            <div className="pointer-events-none absolute left-1/2 top-[48%] -z-20 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-400/15 blur-[80px]" />
+
+            {/* Soft warm core directly behind the building (no hard ellipse edge) */}
             <div
-              className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"
+              className="pointer-events-none absolute left-1/2 top-[44%] -z-10 -translate-x-1/2 -translate-y-1/2"
               style={{
-                width: "82%",
-                height: "92%",
+                width: "78%",
+                height: "82%",
+                background:
+                  "radial-gradient(ellipse 60% 65% at 50% 45%, rgba(229,184,105,0.42) 0%, rgba(198,140,72,0.22) 35%, rgba(106,63,24,0.12) 60%, transparent 85%)",
+                filter: "blur(8px)",
               }}
-            >
-              <div
-                className="h-full w-full rounded-[50%]"
-                style={{
-                  background:
-                    "radial-gradient(ellipse at center, #E5B869 0%, #C68C48 40%, #6A3F18 78%, transparent 100%)",
-                  filter: "blur(0.5px)",
-                  opacity: 0.55,
-                }}
-              />
-            </div>
+            />
 
-            {/* Outer soft halo (extends past ellipse) */}
-            <div className="pointer-events-none absolute left-1/2 top-1/2 -z-20 h-[110%] w-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/20 blur-[100px]" />
-
-            {/* Faint pillar curves behind ellipse */}
+            {/* Faint pillar curves behind */}
             <svg
               aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 opacity-[0.08]"
+              className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 opacity-[0.06]"
               viewBox="0 0 200 200"
               fill="none"
             >
@@ -200,7 +194,7 @@ function Hero({ onAspirasi }) {
               />
             </svg>
 
-            {/* Building (no float, dominant) */}
+            {/* Building — masked edges fade to background, color graded warm */}
             <motion.img
               src={REKTORAT_URL}
               alt="Gedung Rektorat Universitas Brawijaya"
@@ -208,37 +202,57 @@ function Hero({ onAspirasi }) {
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               className="relative h-full w-full object-contain"
               style={{
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 78% 82% at 55% 38%, black 38%, rgba(0,0,0,0.85) 58%, rgba(0,0,0,0.4) 75%, transparent 92%)",
+                maskImage:
+                  "radial-gradient(ellipse 78% 82% at 55% 38%, black 38%, rgba(0,0,0,0.85) 58%, rgba(0,0,0,0.4) 75%, transparent 92%)",
                 filter:
-                  "brightness(1.15) contrast(1.05) saturate(1.1) drop-shadow(0 30px 60px rgba(198,140,72,0.45)) drop-shadow(0 0 30px rgba(229,184,105,0.3))",
+                  "sepia(0.32) hue-rotate(-8deg) saturate(1.15) brightness(0.9) contrast(1.08) drop-shadow(0 25px 60px rgba(198,140,72,0.35)) drop-shadow(0 0 30px rgba(229,184,105,0.25))",
               }}
             />
 
-            {/* Reflection at the bottom (BEM FEB UI inspired) */}
+            {/* Subtle navy color overlay tint to harmonise with page palette */}
             <div
-              className="pointer-events-none absolute -bottom-1 left-0 right-0 h-[28%] overflow-hidden"
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
               style={{
-                transform: "scaleY(-1)",
-                opacity: 0.18,
-                maskImage:
-                  "linear-gradient(to bottom, black 0%, transparent 100%)",
+                background:
+                  "linear-gradient(180deg, rgba(11,22,40,0.18) 0%, rgba(11,22,40,0) 35%, rgba(2,4,10,0.55) 100%)",
+                mixBlendMode: "multiply",
                 WebkitMaskImage:
-                  "linear-gradient(to bottom, black 0%, transparent 100%)",
+                  "radial-gradient(ellipse 78% 82% at 55% 38%, black 38%, transparent 92%)",
+                maskImage:
+                  "radial-gradient(ellipse 78% 82% at 55% 38%, black 38%, transparent 92%)",
               }}
-            >
-              <img
-                src={REKTORAT_URL}
-                alt=""
-                className="h-full w-full object-contain object-top"
-                style={{ filter: "brightness(1.1) blur(1px)" }}
-              />
-            </div>
+            />
+
+            {/* Warm gold light wash from above (overlay blend) */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse 50% 40% at 50% 25%, rgba(251,226,160,0.25) 0%, transparent 70%)",
+                mixBlendMode: "overlay",
+              }}
+            />
+
+            {/* Bottom fade to background — kills hard ground line */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-[40%]"
+              style={{
+                background:
+                  "linear-gradient(180deg, transparent 0%, rgba(2,4,10,0.7) 60%, #02040A 100%)",
+              }}
+            />
 
             {/* Light beam from top */}
             <div
-              className="pointer-events-none absolute -top-8 left-1/2 h-44 w-1.5 -translate-x-1/2"
+              className="pointer-events-none absolute -top-6 left-1/2 h-44 w-1.5 -translate-x-1/2"
               style={{
                 background:
-                  "linear-gradient(180deg, transparent 0%, rgba(251,226,160,0.7) 50%, transparent 100%)",
+                  "linear-gradient(180deg, transparent 0%, rgba(251,226,160,0.6) 50%, transparent 100%)",
                 filter: "blur(1.5px)",
               }}
             />
