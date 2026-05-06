@@ -48,10 +48,32 @@ export default function Home() {
 function Hero({ onAspirasi }) {
   return (
     <section
-      className="relative overflow-hidden pt-32 pb-24 lg:pt-40 lg:pb-32"
+      className="relative overflow-hidden pt-28 pb-24 lg:pt-32 lg:pb-32"
       data-testid="hero-section"
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 sm:px-8 lg:grid-cols-12 lg:gap-8">
+      {/* Decorative flowing curve line — bottom left */}
+      <svg
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-24 -left-24 hidden h-[520px] w-[700px] opacity-40 lg:block"
+        viewBox="0 0 700 520"
+        fill="none"
+      >
+        <path
+          d="M -20 480 Q 200 480 300 380 T 580 120 Q 640 60 700 40"
+          stroke="url(#curveGrad)"
+          strokeWidth="1.2"
+          fill="none"
+        />
+        <defs>
+          <linearGradient id="curveGrad" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stopColor="rgba(229,184,105,0)" />
+            <stop offset="40%" stopColor="rgba(229,184,105,0.6)" />
+            <stop offset="100%" stopColor="rgba(198,140,72,0)" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-6 sm:px-8 lg:grid-cols-12 lg:gap-6">
         {/* Left - typography */}
         <motion.div
           initial="hidden"
@@ -60,34 +82,34 @@ function Hero({ onAspirasi }) {
             hidden: {},
             show: { transition: { staggerChildren: 0.12 } },
           }}
-          className="lg:col-span-7"
+          className="lg:col-span-6"
         >
+          {/* Welcome pill (BEM FEB UI inspired) */}
           <motion.div
             variants={fadeUp}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-500/10 px-4 py-1.5 text-[11px] uppercase tracking-[0.25em] text-amber-300"
+            className="mb-7 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-gradient-to-r from-amber-500/15 to-amber-700/5 px-5 py-2 backdrop-blur-md shadow-[0_8px_30px_-12px_rgba(229,184,105,0.4)]"
           >
-            <ShieldCheck className="h-3.5 w-3.5" />
-            Periode Kepengurusan 2026
+            <ShieldCheck className="h-3.5 w-3.5 text-amber-300" />
+            <span className="text-[11px] uppercase tracking-[0.3em] text-amber-200">
+              Selamat Datang Di
+            </span>
           </motion.div>
 
           <motion.h1
             variants={fadeUp}
-            className="font-display text-5xl leading-[0.95] tracking-tighter text-white sm:text-6xl lg:text-7xl"
+            className="font-display text-6xl font-bold leading-[0.92] tracking-tighter text-white sm:text-7xl lg:text-[88px]"
           >
-            Dewan Perwakilan
-            <br />
-            Mahasiswa{" "}
+            DPM UB{" "}
             <span
-              className="italic"
               style={{
                 background:
-                  "linear-gradient(120deg, #FBE2A0 0%, #E5B869 50%, #C68C48 100%)",
+                  "linear-gradient(120deg, #FBE2A0 0%, #E5B869 45%, #C68C48 100%)",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 color: "transparent",
               }}
             >
-              Brawijaya
+              2026
             </span>
           </motion.h1>
 
@@ -95,24 +117,25 @@ function Hero({ onAspirasi }) {
             variants={fadeUp}
             className="mt-6 flex items-center gap-4"
           >
-            <div className="h-px w-10 bg-gradient-to-r from-amber-500 to-transparent" />
-            <p className="font-display text-2xl italic text-amber-300">
+            <div className="h-px w-12 bg-gradient-to-r from-amber-500 to-transparent" />
+            <p className="font-display text-xl italic text-amber-300 sm:text-2xl">
               Parlemen Pilar Karsa
             </p>
           </motion.div>
 
           <motion.p
             variants={fadeUp}
-            className="mt-7 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg"
+            className="mt-7 max-w-xl text-base leading-relaxed text-slate-300"
           >
-            Lima pilar yang menopang representasi mahasiswa: legislasi,
-            pengawasan, anggaran, advokasi, dan hubungan masyarakat.
-            Kami berdiri untuk satu hal — suara mahasiswa yang tidak boleh hilang.
+            DPM UB adalah lembaga perwakilan mahasiswa Universitas Brawijaya
+            yang menjalankan fungsi legislasi, pengawasan, dan advokasi.
+            Kami berdiri untuk memastikan setiap suara mahasiswa terdengar
+            dan menjadi pondasi kebijakan kampus.
           </motion.p>
 
           <motion.div
             variants={fadeUp}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-9 flex flex-wrap items-center gap-3"
           >
             <button
               type="button"
@@ -132,115 +155,157 @@ function Hero({ onAspirasi }) {
               Pelajari 5 Pilar
             </a>
           </motion.div>
-
-          {/* small stats strip */}
-          <motion.div
-            variants={fadeUp}
-            className="mt-14 grid max-w-lg grid-cols-3 gap-4"
-          >
-            {[
-              { v: "16", l: "Fakultas" },
-              { v: "60+", l: "Anggota" },
-              { v: "2026", l: "Periode" },
-            ].map((s, i) => (
-              <div
-                key={i}
-                className="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-4 py-3 backdrop-blur-md"
-              >
-                <div className="font-display text-3xl text-white">{s.v}</div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-slate-400">
-                  {s.l}
-                </div>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
 
-        {/* Right - blended Rektorat */}
+        {/* Right - dominant Rektorat with elliptical halo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          className="relative lg:col-span-5"
+          className="relative lg:col-span-6"
           data-testid="hero-rektorat"
         >
-          {/* radial glow */}
-          <div className="absolute left-1/2 top-1/2 -z-10 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/25 blur-[120px]" />
-          <div className="absolute left-1/2 top-1/2 -z-10 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-300/20 blur-[80px]" />
-
-          {/* concentric rings */}
-          <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-full border border-amber-400/15"
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[600px]">
+            {/* Elliptical gold halo behind building (BEM FEB UI inspired) */}
+            <div
+              className="pointer-events-none absolute left-1/2 top-1/2 -z-10 -translate-x-1/2 -translate-y-1/2"
+              style={{
+                width: "82%",
+                height: "92%",
+              }}
+            >
+              <div
+                className="h-full w-full rounded-[50%]"
                 style={{
-                  width: 280 + i * 90,
-                  height: 280 + i * 90,
-                }}
-                animate={{ rotate: 360 }}
-                transition={{
-                  duration: 60 + i * 20,
-                  repeat: Infinity,
-                  ease: "linear",
+                  background:
+                    "radial-gradient(ellipse at center, #E5B869 0%, #C68C48 40%, #6A3F18 78%, transparent 100%)",
+                  filter: "blur(0.5px)",
+                  opacity: 0.55,
                 }}
               />
-            ))}
-          </div>
+            </div>
 
-          {/* Building wrapper */}
-          <motion.div
-            animate={{ y: [-6, 8, -6] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="relative mx-auto aspect-square w-full max-w-[480px]"
-          >
-            <img
+            {/* Outer soft halo (extends past ellipse) */}
+            <div className="pointer-events-none absolute left-1/2 top-1/2 -z-20 h-[110%] w-[110%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/20 blur-[100px]" />
+
+            {/* Faint pillar curves behind ellipse */}
+            <svg
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[80%] w-[80%] -translate-x-1/2 -translate-y-1/2 opacity-[0.08]"
+              viewBox="0 0 200 200"
+              fill="none"
+            >
+              <path
+                d="M100 20 L100 180 M55 55 Q100 100 55 180 M145 55 Q100 100 145 180"
+                stroke="#FBE2A0"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+
+            {/* Building (no float, dominant) */}
+            <motion.img
               src={REKTORAT_URL}
               alt="Gedung Rektorat Universitas Brawijaya"
-              className="rektorat-mask h-full w-full object-contain"
+              animate={{ y: [-4, 6, -4] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="relative h-full w-full object-contain"
               style={{
                 filter:
-                  "sepia(0.45) hue-rotate(-15deg) saturate(1.2) brightness(1.1) drop-shadow(0 20px 60px rgba(198,140,72,0.4))",
+                  "brightness(1.15) contrast(1.05) saturate(1.1) drop-shadow(0 30px 60px rgba(198,140,72,0.45)) drop-shadow(0 0 30px rgba(229,184,105,0.3))",
               }}
             />
-            {/* light beam from top */}
+
+            {/* Reflection at the bottom (BEM FEB UI inspired) */}
             <div
-              className="pointer-events-none absolute -top-12 left-1/2 h-40 w-2 -translate-x-1/2"
+              className="pointer-events-none absolute -bottom-1 left-0 right-0 h-[28%] overflow-hidden"
+              style={{
+                transform: "scaleY(-1)",
+                opacity: 0.18,
+                maskImage:
+                  "linear-gradient(to bottom, black 0%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, black 0%, transparent 100%)",
+              }}
+            >
+              <img
+                src={REKTORAT_URL}
+                alt=""
+                className="h-full w-full object-contain object-top"
+                style={{ filter: "brightness(1.1) blur(1px)" }}
+              />
+            </div>
+
+            {/* Light beam from top */}
+            <div
+              className="pointer-events-none absolute -top-8 left-1/2 h-44 w-1.5 -translate-x-1/2"
               style={{
                 background:
-                  "linear-gradient(180deg, transparent 0%, rgba(229,184,105,0.55) 50%, transparent 100%)",
-                filter: "blur(2px)",
+                  "linear-gradient(180deg, transparent 0%, rgba(251,226,160,0.7) 50%, transparent 100%)",
+                filter: "blur(1.5px)",
               }}
             />
-          </motion.div>
 
-          {/* floating logo badge */}
-          <motion.div
-            animate={{ y: [0, -8, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -bottom-2 -left-4 hidden md:flex items-center gap-3 rounded-2xl border border-white/10 bg-[#070C16]/80 p-3 pr-5 backdrop-blur-xl shadow-2xl"
-          >
-            <img src={LOGO_URL} alt="" className="h-10 w-10" />
-            <div>
-              <div className="text-[10px] uppercase tracking-[0.25em] text-amber-400/80">
-                Established
+            {/* Floating "Aktif Bertugas" badge */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-2 -right-2 hidden md:flex items-center gap-2 rounded-full border border-amber-400/40 bg-[#070C16]/85 px-4 py-2 backdrop-blur-xl shadow-2xl"
+            >
+              <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_10px_2px_rgba(229,184,105,0.8)]" />
+              <span className="text-[11px] uppercase tracking-[0.2em] text-slate-100">
+                Aktif Bertugas
+              </span>
+            </motion.div>
+
+            {/* Floating logo badge */}
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-3 -left-2 hidden md:flex items-center gap-3 rounded-2xl border border-white/10 bg-[#070C16]/85 p-3 pr-5 backdrop-blur-xl shadow-2xl"
+            >
+              <img src={LOGO_URL} alt="" className="h-10 w-10" />
+              <div>
+                <div className="text-[9px] uppercase tracking-[0.25em] text-amber-400/80">
+                  Established
+                </div>
+                <div className="font-display text-base text-white">
+                  DPM UB · 2026
+                </div>
               </div>
-              <div className="font-display text-base text-white">DPM UB · 2026</div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -top-4 right-0 hidden md:flex items-center gap-2 rounded-full border border-amber-400/30 bg-[#070C16]/80 px-4 py-2 backdrop-blur-xl"
-          >
-            <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_10px_2px_rgba(229,184,105,0.7)]" />
-            <span className="text-[11px] uppercase tracking-[0.2em] text-slate-200">
-              Aktif Bertugas
-            </span>
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
+
+      {/* Stats strip — full width below hero */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+        className="mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-3 px-6 sm:grid-cols-4 sm:px-8"
+        data-testid="hero-stats"
+      >
+        {[
+          { v: "16", l: "Fakultas" },
+          { v: "60+", l: "Anggota" },
+          { v: "5", l: "Pilar Fungsi" },
+          { v: "2026", l: "Periode" },
+        ].map((s, i) => (
+          <div
+            key={i}
+            className="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 backdrop-blur-md transition-all hover:border-amber-400/30 hover:bg-white/[0.04]"
+          >
+            <div className="font-display text-3xl text-white sm:text-4xl">
+              {s.v}
+            </div>
+            <div className="mt-1 text-[10px] uppercase tracking-[0.22em] text-slate-400">
+              {s.l}
+            </div>
+          </div>
+        ))}
+      </motion.div>
 
       <div className="gold-divider mx-auto mt-24 max-w-7xl" />
     </section>
