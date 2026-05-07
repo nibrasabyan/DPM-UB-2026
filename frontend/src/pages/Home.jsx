@@ -159,7 +159,7 @@ function Hero({ onAspirasi }) {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          className="relative lg:col-span-6"
+          className="relative lg:col-span-6 overflow-hidden"
           data-testid="hero-rektorat"
         >
           <div className="relative mx-auto aspect-[4/5] w-full max-w-[620px]">

@@ -40,6 +40,13 @@ export default function Header() {
 
   useEffect(() => setOpen(false), [location.pathname]);
 
+  const handleHomeClick = (e) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <header
@@ -122,6 +129,7 @@ export default function Header() {
                 to={item.to}
                 end={item.to === "/"}
                 data-testid={item.testid}
+                onClick={item.to === "/" ? handleHomeClick : undefined}
                 className={({ isActive }) =>
                   `relative rounded-full font-medium ${
                     isActive
@@ -189,6 +197,7 @@ export default function Header() {
                   to={item.to}
                   end={item.to === "/"}
                   data-testid={`mobile-${item.testid}`}
+                  onClick={item.to === "/" ? handleHomeClick : undefined}
                   className={({ isActive }) =>
                     `rounded-xl px-4 py-3 text-base font-medium transition-colors ${
                       isActive

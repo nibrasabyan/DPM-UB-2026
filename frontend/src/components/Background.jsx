@@ -45,13 +45,7 @@ export default function Background() {
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* blob 2 — copper */}
-      <motion.div
-        className="absolute right-[-120px] top-[40%] h-[460px] w-[460px] rounded-full blur-[140px]"
-        style={{ background: "rgba(198, 140, 72, 0.22)" }}
-        animate={{ x: [0, -50, 0], y: [0, 40, 0] }}
-        transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
-      />
+
 
       {/* blob 3 — deep navy bottom */}
       <motion.div
@@ -61,18 +55,11 @@ export default function Background() {
         transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* conic beam top-right */}
-      <div
-        className="absolute right-0 top-0 h-[800px] w-[800px] opacity-30"
-        style={{
-          background:
-            "conic-gradient(from 200deg at 70% 10%, transparent 0deg, rgba(229,184,105,0.15) 40deg, transparent 80deg)",
-        }}
-      />
+
 
       {/* faint pillar SVG decoration */}
       <svg
-        className="absolute left-1/2 top-1/3 h-[600px] w-[600px] -translate-x-1/2 opacity-[0.04]"
+        className="absolute left-1/2 top-1/3 h-[600px] w-[600px] -translate-x-1/2 opacity-[0.07]"
         viewBox="0 0 200 200"
         fill="none"
       >
